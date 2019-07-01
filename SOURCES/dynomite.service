@@ -1,0 +1,22 @@
+[Unit]
+Description=Dynomite server
+After=network.target nss-lookup.target time-sync.target
+Documentation=man:dynomite(8)
+
+[Service]
+User=dynomite
+Group=dynomite
+Environment=DYNOMITE_CONF=/etc/dynomite/dynomite.yml
+Environment=DYNOMITE_LOG=/var/log/dynomite/dynomite.log
+Type=forking
+EnvironmentFile=-/etc/sysconfig/dynomite
+ExecStart=/usr/sbin/dynomite -d -c $DYNOMITE_CONF -p /var/run/dynomite/dynomite.pid -o $DYNOMITE_LOG
+ExecStartPre=/usr/bin/mkdir -p /var/run/dynomite
+ExecStartPre=/usr/bin/chown dynomite:dynomite /var/run/dynomite
+ExecStartPre=/usr/bin/chmod 0755 /var/run/dynomite
+PermissionsStartOnly=true
+Restart=always
+PIDFile=/var/run/dynomite/dynomite.pid
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+--- a/configure.ac 2019-01-10 21:13:49.000000000 +0200
++++ b/configure.ac 2019-05-28 13:39:32.652893542 +0300
+@@ -4,7 +4,7 @@
+
+ # Define the bug reporting address and package version
+ m4_define([DN_BUGS], [dynomite@netflix.com])
+-m4_define([DN_VERSION_STRING], m4_esyscmd_s([git describe --dirty --always --tags]))
++m4_define([DN_VERSION_STRING], m4_include([VERSION]))
+
+ # Initialize autoconf
+ AC_PREREQ([2.63])
